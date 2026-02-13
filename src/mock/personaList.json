@@ -1,0 +1,35 @@
+[
+  {
+    "value": "icg_usage_all",
+    "label": "Admin",
+    "entitlement_group": "ICG_USAGE_ALL",
+    "entitledDashboards": ["Page", "Publication", "Search", "Platform", "Partnership"],
+    "configAPI": {
+      "Page": "default",
+      "Platform": "default",
+      "Partnership": "default",
+      "Search": "default",
+      "Publication": "default"
+    }
+  },
+  {
+    "value": "client_management",
+    "label": "Client Management",
+    "entitlement_group": "ICG_USAGE_Client_Management",
+    "entitledDashboards": ["Page", "Search"],
+    "configAPI": {
+      "Page": "default",
+      "Search": "default"
+    }
+  },
+  {
+    "value": "cv_markets_revenue",
+    "label": "Citi Velocity Markets Revenue",
+    "entitlement_group": "ICG_USAGE_CV_MARKETS",
+    "entitledDashboards": ["Page", "Platform"],
+    "configAPI": {
+      "Page": "default",
+      "Platform": "default"
+    }
+  }
+]
