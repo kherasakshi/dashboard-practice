@@ -1,0 +1,79 @@
+{
+  "personas": [
+    {
+      "value": "icg_usage_all",
+      "label": "Admin",
+      "entitlement_group": "ICG_USAGE_ALL",
+      "entitledDashboards": [
+        "Page",
+        "Publication",
+        "Search",
+        "Platform",
+        "Partnership"
+      ],
+      "configAPI": {
+        "Page": "default",
+        "Platform": "default",
+        "Partnership": "default",
+        "Search": "default",
+        "Publication": "default"
+      }
+    },
+    {
+      "value": "client_management",
+      "label": "Client Management",
+      "entitlement_group": "ICG_USAGE_Client_Management",
+      "entitledDashboards": ["Page", "Search"],
+      "configAPI": {
+        "Page": "default",
+        "Search": "default"
+      }
+    },
+    {
+      "value": "cv_markets_revenue",
+      "label": "Citi Velocity Markets Revenue",
+      "entitlement_group": "ICG_USAGE_CV_MARKETS",
+      "entitledDashboards": ["Page", "Platform"],
+      "configAPI": {
+        "Page": "default",
+        "Platform": "default"
+      }
+    }
+  ],
+
+  "uiConfig": {
+    "icg_usage_all": {
+      "Page": {
+        "widgets": ["Revenue Chart", "Top Clients", "Usage Trend"]
+      },
+      "Search": {
+        "widgets": ["Search Volume", "Search Analytics"]
+      },
+      "Platform": {
+        "widgets": ["Platform Overview", "Active Users"]
+      },
+      "Publication": {
+        "widgets": ["Publication Stats", "Top Articles"]
+      },
+      "Partnership": {
+        "widgets": ["Partner Performance", "Engagement Trend"]
+      }
+    },
+    "client_management": {
+      "Page": {
+        "widgets": ["Client Growth", "Active Clients"]
+      },
+      "Search": {
+        "widgets": ["Client Search Analytics"]
+      }
+    },
+    "cv_markets_revenue": {
+      "Page": {
+        "widgets": ["Page Revenue"]
+      },
+      "Platform": {
+        "widgets": ["Platform Revenue", "Market Share"]
+      }
+    }
+  }
+}
