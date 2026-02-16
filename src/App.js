@@ -1,35 +1,58 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import personaData from "./mock/personaList.json";
-import uiConfigData from "./mock/uiConfig.json";
+import {fetchPersonas$, fetchUIConfig$} from "./service/apiService";
 import { setProfiles, selectProfile, selectTab } from "./redux/personaSlice";
 import { setUIConfig } from "./redux/uiConfigSlice";
 import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-  const profiles = useSelector((state) => state.persona.profiles);
-  const selectedProfile = useSelector((state) => state.persona.selectedProfile);
-  const selectedTab = useSelector((state) => state.persona.selectedTab);
+
+  const { profiles, selectedProfile, selectedTab } = useSelector(
+    (state) => state.persona
+  );
+
   const uiConfig = useSelector((state) => state.uiConfig.config);
 
   useEffect(() => {
-    // Mock API delay
-    setTimeout(() => {
-      dispatch(setProfiles(personaData));
-    }, 500);
+    // Subscribe to Personas API
+    const personaSub = fetchPersonas$().subscribe({
+      next: (data) => {
+        dispatch(setProfiles(data));
+      },
+      error: (err) => {
+        console.error("Persona API Error:", err);
+      },
+    });
 
-    dispatch(setUIConfig(uiConfigData));
+    // Subscribe to UI Config API
+    const uiConfigSub = fetchUIConfig$().subscribe({
+      next: (data) => {
+        dispatch(setUIConfig(data));
+      },
+      error: (err) => {
+        console.error("UI Config API Error:", err);
+      },
+    });
+
+    // Cleanup
+    return () => {
+      personaSub.unsubscribe();
+      uiConfigSub.unsubscribe();
+    };
   }, [dispatch]);
 
   return (
     <div className="App">
-      <h1>Enterprise Dashboard Mock</h1>
+      <h1>Enterprise Dashboard</h1>
 
       {/* Profile Dropdown */}
       <select
+        value={selectedProfile?.value || ""}
         onChange={(e) => {
-          const profile = profiles.find((p) => p.value === e.target.value);
+          const profile = profiles.find(
+            (p) => p.value === e.target.value
+          );
           dispatch(selectProfile(profile));
         }}
       >
@@ -59,7 +82,7 @@ function App() {
       {/* Widgets */}
       {selectedProfile && selectedTab && (
         <div className="widgets">
-          {uiConfig[selectedProfile.value]?.[selectedTab]?.widgets?.map(
+          {uiConfig?.[selectedProfile.value]?.[selectedTab]?.widgets?.map(
             (widget) => (
               <div className="card" key={widget}>
                 {widget}
